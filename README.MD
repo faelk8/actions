@@ -65,7 +65,7 @@ Quando enviar os novos arquivos junto com o `ci.yaml`, o GitHub Actions vai test
 * Ajustar as configurações para as regras e proteções as branchs.
 
 # Ajustando o Código
-Todas as vezes que subir algo para a branch develop o código vai ser testado.
+Todas as vezes que subir algo para a branch develop o código vai ser testado.<br>
 `ci.yaml`
 ```
 name: ci-golang-workflow
