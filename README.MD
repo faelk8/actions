@@ -35,6 +35,7 @@ func TestSoma(t *testing.T) {
 	}
 }
 ```
+
 # Criar o repositório
 Crair o repositório.
 ```
@@ -110,6 +111,26 @@ jobs:
       - run: go test
       - run: go run math.go
 ```
+
+# Criado a Imagem
+`Dockerfile`
+```
+FROM golang:1.19
+
+WORKDIR /app
+
+RUN go mod init teste
+
+COPY . .
+
+RUN go build -o math
+
+CMD ["./math"]
+```
+
+
+
+
 
 # Comandos
 | git checkout -b feature/github-matrix | | 
