@@ -84,3 +84,32 @@ jobs:
       - run: go test
       - run: go run math.go
 ```
+
+# Strategy
+Difindo em quais versões do Go o código vai ser testado.
+`ci.yaml`
+```
+name: ci-golang-workflow
+on: 
+  pull_request:
+    branches: 
+      - develop
+
+strategy:
+  matrix:
+    go: ['1.14','1.15']
+
+jobs:
+  check-application:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version:  ${{matrix.go}}
+      - run: go test
+      - run: go run math.go
+```
+
+# Comandos
+| git checkout -b feature/github-matrix | | 
