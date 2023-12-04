@@ -119,7 +119,7 @@ FROM golang:1.19
 
 WORKDIR /app
 
-RUN go mod init teste
+RUN go mod init math
 
 COPY . .
 
