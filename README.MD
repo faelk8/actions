@@ -37,13 +37,13 @@ func TestSoma(t *testing.T) {
 ```
 
 # Criar o repositório
-Crair o repositório.
+Criar o repositório.
 ```
 git init 
 git branch -M main
   # ...
 ```
-Com os arquivo da api pronto, cria uma pasta `.github/workflow` contendo o arquivo `ci.yaml`, neste arquivo vai ter as configurações para testar a aplicação.<br>
+Com os arquivo da api pronto, crie uma pasta `.github/workflow` contendo o arquivo `ci.yaml`, neste arquivo vai ter as configurações para testar a aplicação.<br>
 * No arquivo contém as instruções para rodar a aplicação em uma máquina Ubuntu e 
 testar o código Go.<br>
 
@@ -63,7 +63,7 @@ jobs:
       - run: go run math.go
 ```
 Quando enviar os novos arquivos junto com o `ci.yaml`, o GitHub Actions vai testar o código.
-* Ajustar as configurações para as regras e proteções as branchs.
+* Ajustar as configurações para as regras e proteções das branchs.
 
 # Ajustando o Código
 Todas as vezes que subir algo para a branch develop o código vai ser testado.<br>
@@ -148,24 +148,23 @@ jobs:
           go-version:  ${{matrix.go}}
       - run: go test
       - run: go run math.go
-
-    # Criando a imagem dentro do github
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v1
+
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      # - name: Login to Docker Hub
-      #   uses: docker/login-action@v3
-      #   with:
-      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
-      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
-        uses: faelk8/build-push-action@v5
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
         with:
-          push: false #true para salvar no docker hub
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
           tags: faelk8/actions:latest
+
 ```
-
-
-# Comandos
-| git checkout -b feature/github-matrix | | 
